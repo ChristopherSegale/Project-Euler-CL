@@ -11,7 +11,7 @@
 (defun problem002 ()
   (setf fibs (get-fibs 4000000))
   (loop for i in fibs do
-     if (= 0 (mod i 2))
+     if (evenp i)
    sum i))
 
 (defun main ()
