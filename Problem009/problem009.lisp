@@ -1,8 +1,8 @@
 ;;;; Author: Christopher Segale
 ;;;; Date: 6/25/2013
+
 (defun is-pyth-triplet (a b c)
   (= (+ (* a a) (* b b)) (* c c)))
-
 
 (defun problem009 ()
   (loop for a from 1 to (/ 1000 3) do
