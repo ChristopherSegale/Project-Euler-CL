@@ -3,7 +3,6 @@
 
 (defun get-primes (limit)
   (setf candidates (loop for i from 2 to limit if (or (= i 2) (oddp i)) collect i))
-  (setf n 3)
 
   (loop for n in candidates
     while (< (* n n) limit) do
