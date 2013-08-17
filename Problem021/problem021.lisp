@@ -21,15 +21,15 @@
   (return-from if-repeat nil))
 
 (defun problem021 ()
-  (setf amicable-pairs '())
+  (let ((amicable-pairs '()))
 
-  (do ((n 220 (1+ n)))                 ; 220 is the first amicable number
-      ((>= n 10000))
-    (let ((temp-pair (get-amicable-pair n)))
-      (if (and (not (zerop (elt temp-pair 0))) (not (if-repeat n amicable-pairs)))
-        (setf amicable-pairs (append amicable-pairs temp-pair)))))
+    (do ((n 220 (1+ n)))               ; 220 is the first amicable number
+        ((>= n 10000))
+      (let ((temp-pair (get-amicable-pair n)))
+        (if (and (not (zerop (elt temp-pair 0))) (not (if-repeat n amicable-pairs)))
+          (setf amicable-pairs (append amicable-pairs temp-pair)))))
 
-  (return-from problem021 (apply #'+ amicable-pairs)))
+    (return-from problem021 (apply #'+ amicable-pairs))))
 
 (defun main ()
   (print (problem021)))
