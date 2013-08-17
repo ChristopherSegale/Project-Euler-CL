@@ -10,14 +10,14 @@
   (* (get-num num-one) (get-num num-two) (get-num num-three) (get-num num-four) (get-num num-five)))
 
 (defun problem008 ()
-  (setf max-product 0)
+  (let ((max-product 0))
 
-  (do ((n 0 (1+ n)))
-      ((>= n (- (length +number-list+) 5)))
-    (if (< max-product (get-product n (+ 1 n) (+ 2 n) (+ 3 n) (+ 4 n)))
-      (setf max-product (get-product n (+ 1 n) (+ 2 n) (+ 3 n) (+ 4 n)))))
+    (do ((n 0 (1+ n)))
+        ((>= n (- (length +number-list+) 5)))
+      (if (< max-product (get-product n (+ 1 n) (+ 2 n) (+ 3 n) (+ 4 n)))
+        (setf max-product (get-product n (+ 1 n) (+ 2 n) (+ 3 n) (+ 4 n)))))
 
-  (return-from problem008 max-product))
+    (return-from problem008 max-product)))
 
 (defun main ()
   (print (problem008)))
