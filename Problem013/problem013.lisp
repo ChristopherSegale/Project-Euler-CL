@@ -9,10 +9,10 @@
       (close in))))
 
 (defun get-sum()
-  (setf numbers (get-list "numbers.txt"))
+  (let ((numbers (get-list "numbers.txt")))
 
-  (loop for n in numbers
-    sum n))
+    (loop for n in numbers
+      sum n)))
 
 (defun problem013 ()
   (subseq (princ-to-string (get-sum)) 0 10))
