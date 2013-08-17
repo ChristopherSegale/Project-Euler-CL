@@ -10,15 +10,15 @@
   (equal (write-to-string number) (reverse-string (write-to-string number))))
 
 (defun problem004 ()
-  (setf palindrome 0)
+  (let ((palindrome 0))
 
-  (do ((p1 100 (1+ p1)))
-      ((>= p1 1000))
-    (do ((p2 100 (1+ p2)))
-        ((>= p2 1000))
-      (if (and (is-num-palindrome (* p1 p2)) (< palindrome (* p1 p2)))
-        (setf palindrome (* p1 p2)))))
-  (return-from problem004 palindrome))
+    (do ((p1 100 (1+ p1)))
+        ((>= p1 1000))
+      (do ((p2 100 (1+ p2)))
+          ((>= p2 1000))
+        (if (and (is-num-palindrome (* p1 p2)) (< palindrome (* p1 p2)))
+          (setf palindrome (* p1 p2)))))
+    (return-from problem004 palindrome)))
 
 (defun main ()
   (print (problem004)))
