@@ -1,16 +1,37 @@
 ;;;; Author: Christopher Segale
-;;;; Date: 6/21/2013
-;;;; Incomplete
+;;;; Date: 8/20/2013
 
-(defun is-prime (number)
-  (if (= 1 number) (return-from is-prime NIL))
-  (if (= 2 number) (return-from is-prime T))
-  (loop for counter from 2 to (- number 1)
-     if (= 0 (mod number counter))
-   do (return-from is-prime NIL))
-  (return-from is-prime T))
+(defun primep (n)
+  (if (= n 2)
+    (return-from primep t)
+    (progn
+      (if (evenp n)
+        (return-from primep nil)
+        (progn
+          (do ((f 3 (+ 2 f)))
+              ((> f (isqrt n)))
+            (if (zerop (mod n f))
+              (return-from primep nil)))
+          (return-from primep t))))))
+
+(defun get-prime-factors (n)
+  (let ((prime-factors '()))
+    (do ((f 2 (1+ f)) (d n))
+        ((> (* f f) d))
+      (when (and (primep f) (zerop (mod n f)))
+        (setf d (/ d f))
+        (push f prime-factors)
+        (when (primep d)
+          (push d prime-factors)
+          (return-from get-prime-factors prime-factors))))))
+
+(defun largest-prime-factor (n)
+  (first (get-prime-factors n)))
 
 (defun problem003 ()
-  (loop for factor from 1 to (/ 600851475143 2)
-     if (is-prime factor)
-   do (setf largest-prime-factor factor)))
+  (largest-prime-factor 600851475143))
+
+(defun main ()
+  (format t "~a" (problem003)))
+
+(main)
